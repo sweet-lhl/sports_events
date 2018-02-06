@@ -10,7 +10,7 @@
         </div>
         <div class="head_nav_set">
           <div class="head_nav_screen"><img src="../assets/images/img02.png"></div>
-          <div class="head_nav_up" @click.captrue="setup=!setup"><img src="../assets/images/img01.png"></div>
+          <div class="head_nav_up" @click.captrue="setup=!setup;setupMark=!setupMark"><img src="../assets/images/img01.png"></div>
         </div>
       </div>
 
@@ -80,11 +80,11 @@
           <span class="mark_word">即时足球指数</span>
           <div v-if="totalSwitch===true">
             <span class="mark_btn" @click.captrue="totalSwitch=false;cancel=true">赛事</span>
-            <span class="mark_btn" @click.captrue="totalSwitch=false;cancel=false">公司</span>
+            <span class="mark_btn" @click.captrue="totalSwitch=false;cancel=true">公司</span>
           </div>
           <div v-else>
-            <span class="mark_btn" @click.captrue="totalSwitch=true;cancel=cancel">确定</span>
-            <span class="mark_btntwo" @click.captrue="totalSwitch=true;cancel=!cancel">取消</span>
+            <span class="mark_btn" @click.captrue="totalSwitch=true;cancel=false">确定</span>
+            <span class="mark_btntwo" @click.captrue="totalSwitch=true;cancel=false">取消</span>
           </div>
         </div>
       </div>
@@ -143,37 +143,39 @@
             </tbody>
           </table>
         </div>
-        <div v-if="cancel===true" class="mark_screen">
-          <div class="mark_screen_title">赔率类型选择</div>
-          <div class="mark_screen_cont">
-            <div class="mark_screen_list">亚赔</div>
-            <div class="mark_screen_list">欧赔</div>
-            <div class="mark_screen_list">大小</div>
-            <div class="clear"></div>
+        <div v-if="cancel===true">
+          <div class="mark_screen">
+            <div class="mark_screen_title">赔率类型选择</div>
+            <div class="mark_screen_cont">
+              <div class="mark_screen_list">亚赔</div>
+              <div class="mark_screen_list">欧赔</div>
+              <div class="mark_screen_list">大小</div>
+              <div class="clear"></div>
+            </div>
+            <div class="mark_screen_title">公司选择(最多四家)</div>
+            <div class="mark_screen_cont">
+              <div class="mark_screen_list">亚赔</div>
+              <div class="mark_screen_list">韦德</div>
+              <div class="mark_screen_list">SB</div>
+              <div class="mark_screen_list">利记</div>
+              <div class="clear"></div>
+            </div>
           </div>
-          <div class="mark_screen_title">公司选择(最多四家)</div>
-          <div class="mark_screen_cont">
-            <div class="mark_screen_list">亚赔</div>
-            <div class="mark_screen_list">韦德</div>
-            <div class="mark_screen_list">SB</div>
-            <div class="mark_screen_list">利记</div>
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div class="mark_screen" id="mark_match">
-          <div class="mark_screen_cont">
-            <div class="mark_screen_list">英超</div>
-            <div class="mark_screen_list">自由杯</div>
-            <div class="mark_screen_list">意甲</div>
-            <div class="mark_screen_list">西杯</div>
-            <div class="mark_screen_list">荷兰杯</div>
-            <div class="mark_screen_list">英女足</div>
-            <div class="clear"></div>
+          <div class="mark_screen" id="mark_match">
+            <div class="mark_screen_cont">
+              <div class="mark_screen_list">英超</div>
+              <div class="mark_screen_list">自由杯</div>
+              <div class="mark_screen_list">意甲</div>
+              <div class="mark_screen_list">西杯</div>
+              <div class="mark_screen_list">荷兰杯</div>
+              <div class="mark_screen_list">英女足</div>
+              <div class="clear"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-else>
+    <div  v-if="setupMark==true">
       <div class="head_childnav">
         <ul>
           <li class="active"><a href="#">即时</a></li>
@@ -185,7 +187,7 @@
           </li>
           <li><a href="datum.html">资料</a></li>
           <li>
-            <a @click.captrue="mark=true">指数</a>
+            <a @click.captrue="mark=true;setupMark=false">指数</a>
           </li>
           <div class="screen"><a @click.captrue="screen=!screen">筛选</a></div>
         </ul>
@@ -294,6 +296,7 @@
         mark: false,//指数
         totalSwitch:true,//公司&赛事总开关
         cancel:false,//取消
+        setupMark:true,//主页
         company:{//指数=>公司&赛事切换
           choice:false,//选择
           cancel:false,//取消
