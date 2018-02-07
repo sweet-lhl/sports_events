@@ -1,12 +1,10 @@
 <template>
     <div id="prospect">
       <div class="head">
-        <div class="head_nav">
-          <div class="head_back"><a href="index.html"><img src="../assets/images/img17.png"></a></div>
-          <div class="head_nav_list head_nav_listtwo head_nav_listthree">
-            赛事前瞻
-          </div>
-        </div>
+        <header>
+          <span class="pull-left icon icon-left"></span>
+          <h1 class="title text-center">赛事前瞻</h1>
+        </header>
         <div class="head_childnavthree">
           <ul>
             <li  class="active">
