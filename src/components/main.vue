@@ -83,7 +83,7 @@
             <span class="mark_btn" @click.captrue="totalSwitch=false;cancel=false">公司</span>
           </div>
           <div v-else>
-            <span class="mark_btn" @click.captrue="totalSwitch=true;cancel=cancel">确定</span>
+            <span class="mark_btn" @click.captrue="totalSwitch=true">确定</span>
             <span class="mark_btntwo" @click.captrue="totalSwitch=true;cancel=!cancel">取消</span>
           </div>
         </div>
