@@ -10,7 +10,7 @@ export default {
   updated() {
     let number = 1;
     try {
-      document.title = document.querySelector('header>.title').innerText;//全局标题处理机制
+      document.title = document.querySelector('header>.title').innerText||document.title;//全局标题处理机制
       document.querySelector('.pull-left') !== null ? (//全局返回處理機制
         document.querySelector('.pull-left').addEventListener('click', () => {
           console.log('back watched!');

@@ -27,7 +27,7 @@
           <li>
             <div class="news_title">印度再度上调电子产品关税，苹果公司受影响最大</div>
             <div class="news_cont">驱动中国2018年2月2日消息 在国内手机市场陷入血海纷争的时候，作为第二人口大国的印度成了厂商眼中的香饽饽。</div>
-            <div class="news_detail"><a href="prospect_detail.html">2018-02-01 10:00 详细>></a><div class="clear"></div></div>
+            <div class="news_detail"><a @click.capture="$router.push({path:'/prospectDetail'})">2018-02-01 10:00 详细>></a><div class="clear"></div></div>
           </li>
           <li>
             <div class="news_title">印度再度上调电子产品关税，苹果公司受影响最大</div>

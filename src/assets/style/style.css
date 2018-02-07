@@ -29,7 +29,6 @@ a{text-decoration: inherit;}
 }
 .head_nav_list{
   width: 7.82rem;
-  height: 2.58rem;
   margin:0px auto;
   padding: 0.58rem 0rem;
   float: left;
@@ -235,7 +234,6 @@ a{text-decoration: inherit;}
 .foot{
   background-color: #e9e9e9;
   border-top: 0.1rem solid #bfbfc7;
-  height: 5rem;
   width: 100%;
   padding: 0.83rem 0rem;
   /*position: absolute;
@@ -260,7 +258,6 @@ a{text-decoration: inherit;}
 }
 .footballvs{
   width: 100%;
-  height: 6.66rem;
   padding: 1.25rem 0px;
 }
 .footballvs_list{
@@ -328,13 +325,13 @@ a{text-decoration: inherit;}
   color: #fff;
   font-size: 1.16rem;
 }
-.foot_child_nav ul li.active a{
+.foot_child_nav ul li.active_yellow a{
   background-color: #ffff00;
   color: #000;
   padding: 2px 5px;
   border-radius: 0.2rem;
 }
-#football_cont{
+.football_cont{
   width: 100%;
 }
 .odds {
@@ -342,34 +339,34 @@ a{text-decoration: inherit;}
   display: block;
   float: left;
 }
-#football_cont table{
+.football_cont table{
   width: 100%;
   background-color: #d2d2d2;
 }
-#football_cont table tr th{
+.football_cont table tr th{
   background-color: #517fe1;
   color: #fff;
   font-size: 1.16rem;
   text-align: center;
   font-weight: normal;
 }
-#football_cont table tr th:nth-child(1){
+.football_cont table tr th:nth-child(1){
   width: 17%;
 }
-#football_cont table tr th:nth-child(2){
+.football_cont table tr th:nth-child(2){
   width: 32%;
 }
-#football_cont table tr th:nth-child(3){
+.football_cont table tr th:nth-child(3){
   width: 32%;
 }
-#football_cont table tr th:nth-child(4){
+.football_cont table tr th:nth-child(4){
   width: 7%;
 }
-#football_cont table tr:nth-child(odd){
+.football_cont table tr:nth-child(odd){
   background-color: #fff;
   line-height: 2.08rem;
 }
-#football_cont table tr:nth-child(even){
+.football_cont table tr:nth-child(even){
   background-color: #f0f5ff;
   line-height: 2.08rem;
 }
@@ -379,13 +376,13 @@ a{text-decoration: inherit;}
 .green {
   color: #1FBA12 !important;
 }
-#football_cont table tr td{
+.football_cont table tr td{
   text-align: center;
 }
-#football_cont table tr td:first-child{
+.football_cont table tr td:first-child{
   color: #282ecd;
 }
-#football_cont table tr td:last-child img{
+.football_cont table tr td:last-child img{
   width: 0.83rem;
 }
 #oupei-two tr th:nth-child(1){
@@ -505,7 +502,7 @@ a{text-decoration: inherit;}
   margin-left: 0.83rem;
 }
 .head_back img{
-  width: 100%;
+  width: 1rem;
   margin-top:0.75rem;
 }
 .head_navtwo{
@@ -600,7 +597,6 @@ a{text-decoration: inherit;}
   background-color: #f3f3f3;
   margin-bottom: 0.83rem;
   padding: 0.83rem;
-  height: 6.66rem;
 }
 .news_title{
   width: 100%;
@@ -774,6 +770,7 @@ a{text-decoration: inherit;}
   margin-top:1.5rem;
 }
 .mark_screen_cont{
+  margin-top: .5rem;
   width: 100%;
 }
 .mark_screen_list{

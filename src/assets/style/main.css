@@ -3,7 +3,7 @@ input {
 }
 
 content > *:first-child {
-    margin: .4rem .5rem;
+    margin: .7rem .5rem;
 }
 
 .cont-search, .con-list > *, .border-item, .international > * {
@@ -12,13 +12,13 @@ content > *:first-child {
 }
 
 .cont-search > * {
-    padding: .4rem;
+    padding: .7rem;
 }
 
 .cont-search > *:first-child {
     flex-basis: 75%;
     -webkit-flex-basis: 75%;
-    font-size: .625rem;
+    font-size: 1rem;
 }
 
 .cont-search > *:last-child {
@@ -27,23 +27,22 @@ content > *:first-child {
     -webkit-flex-basis: 25%;
     background-color: #efefef;
     border-left: 1px solid rgba(198, 198, 198, 0.5);
-    font-size: .7rem;
+    font-size: 1.5rem;
 }
 
 .icon-search:before {
-    font-size: .8rem;
+    font-size: 2rem;
 }
 
 .cont-naw {
-    font-size: .5rem;
+    font-size: .83rem;
     color: white;
-    margin-top: .05rem;
-    line-height: 1.25rem;
+    margin-top: .1rem;
+    line-height: 2rem;
     background-color: #2a2b47;
 }
 
 .con-list {
-    display: none;
     font-size: 0;
     margin: .3rem .1rem;
     /* text-align: center;*/
@@ -57,9 +56,9 @@ content > *:first-child {
 
 .con-list > * {
     display: inline-block;
-    font-size: .5rem;
+    font-size: .83rem;
     width: 23%;
-    line-height: 1.25rem;
+    line-height: 2rem;
     text-align: center;
     margin: 1%;
     padding: 0 .1rem;
@@ -71,8 +70,8 @@ content > *:first-child {
 /*国际赛事赛事资料库*/
 
 .international > * {
-    font-size: .625rem;
-    line-height: 1.75rem;
+    font-size: 1rem;
+    line-height: 2.905rem;
     margin-bottom: .4rem;
     color: #517fe1;
     padding-left: .2rem;
@@ -97,7 +96,7 @@ content > *:first-child {
 .match-item > *:not(:first-child), .table-match > * {
     color: black;
     width: 60%;
-    font-size: .6rem;
+    font-size: 1rem;
     border-radius: .2rem;
 }
 
@@ -106,7 +105,7 @@ content > *:first-child {
 }
 
 .table-match > * {
-    font-size: .6rem;
+    font-size: 1rem;
 }
 
 .table-match {
@@ -115,7 +114,7 @@ content > *:first-child {
 }
 
 .classification {
-    font-size: .575rem;
+    font-size: .95rem;
     padding: .2rem .5rem;
     margin: 0 !important;
     background-color: #313251;
@@ -131,6 +130,9 @@ content > *:first-child {
     padding: .2rem .4rem;
     border-radius: .2rem;
 }
+.classification > *:last-child > *:last-child{
+  margin-left: .6rem;
+}
 
 .blue {
     color: white;
@@ -145,10 +147,6 @@ content > *:first-child {
     margin-right: .2rem;
 }
 
-.raceResult, .proportion > * {
-    display: none;
-}
-
 option {
     background-color: white;
 }
@@ -157,19 +155,19 @@ table {
     table-layout: fixed;
     width: 98%;
     margin: .4rem auto;
-    font-size: .575rem;
+    font-size: .95rem;
     text-align: center;
     border: 1px solid rgba(210, 210, 210, 0.5);
 }
 
 table > *:first-child {
-    line-height: 1.5rem;
+    line-height: 2.5rem;
     margin-top: .2rem;
 }
 
 thead > * {
     background-color: #517fe1;
-    line-height: 1rem;
+    line-height: 1.66rem;
     color: white;
 }
 
@@ -183,7 +181,7 @@ thead > * {
 
 tbody > *, tfoot {
     width: 100%;
-    line-height: 1.5rem;
+    line-height: 2.5rem;
     border-bottom: 1px solid rgba(210, 210, 210, 0.5);
 }
 
@@ -252,7 +250,7 @@ tbody > *, tfoot {
 }
 
 tbody > * > *:first-child > * ,.score>*{
-    line-height: 1rem;
+    line-height: 1.66rem;
 }
 .score>*:first-child>*:first-child{
     color: #fd726b;
@@ -271,4 +269,7 @@ tbody > * > *:first-child > * ,.score>*{
 
 .must {
     margin: 0 !important;
+}
+.icon-left:before{
+  font-size: 1.6rem;
 }

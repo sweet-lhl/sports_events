@@ -215,7 +215,7 @@ html {
 body {
     overflow-y: scroll;
     height: 100%;
-    font-size: 0;
+    font-size: 12px;
     margin: 0
 }
 
@@ -415,7 +415,7 @@ header {
     width: 100%;
     color: white;
     text-align: center;
-    height: 2.25rem;
+    height: 3.73rem;
     background-color: rgb(255, 83, 73);
 }
 
@@ -445,8 +445,8 @@ header > span {
     position: relative;
     z-index: 20;
     padding: .5rem .1rem;
-    font-size: .7rem;
-    line-height: 1.2rem;
+    font-size: 1rem;
+    line-height: 2.5rem;
     color: #FFFFFF
 }
 
@@ -473,9 +473,9 @@ footer > * {
     display: block;
     width: 100%;
     margin: 0 -0.5rem;
-    font-size: 0.7rem;
+    font-size: 1.6rem;
     font-weight: 500;
-    line-height: 2.25rem;
+    line-height: 3.73rem;
     color: #FFFFFF;
     text-align: center;
     white-space: nowrap;
@@ -863,10 +863,6 @@ footer > * {
 /*tab选项卡，选中状态*/
 .active {
     background-color: #41436a;
-}
-
-.active-block {
-    display: block !important;
 }
 
 table {

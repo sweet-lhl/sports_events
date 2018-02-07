@@ -11,7 +11,12 @@ const main = r => require.ensure([], () => r(require('../components/main.vue')),
   setUp = r => require.ensure([], () => r(require('../components/setUp.vue')), 'main'),//设置
   schedule = r => require.ensure([], () => r(require('../components/schedule.vue')), 'main'),//赛程
   prospect = r => require.ensure([], () => r(require('../components/prospect.vue')), 'main'),//前瞻
+  prospectDetail = r => require.ensure([], () => r(require('../components/prospectDetail.vue')), 'main'),//前瞻详情
   mark = r => require.ensure([], () => r(require('../components/mark.vue')), 'main'),//指数
+  dataInternational = r => require.ensure([], () => r(require('../components/dataInternational.vue')), 'main'),//赛事资料库
+  preselection = r => require.ensure([], () => r(require('../components/preselection.vue')), 'main'),//赛程赛果
+  worldCup = r => require.ensure([], () => r(require('../components/worldCup.vue')), 'main'),//赛程赛果&&小组赛
+  england = r => require.ensure([], () => r(require('../components/england.vue')), 'main'),//积分，赛程，大小射手榜
   dataCeania = r => require.ensure([], () => r(require('../components/dataCeania.vue')), 'main')//资料
 ;
 export default new Router({
@@ -37,9 +42,29 @@ export default new Router({
       name: 'prospect',
       component: prospect
     },{
+      path: '/prospectDetail',
+      name: 'prospectDetail',
+      component: prospectDetail
+    },{
       path: '/mark',
       name: 'mark',
       component: mark
+    },{
+      path: '/dataInternational',
+      name: 'dataInternational',
+      component: dataInternational
+    },{
+      path: '/preselection',
+      name: 'preselection',
+      component: preselection
+    },{
+      path: '/england',
+      name: 'england',
+      component: england
+    },{
+      path: '/worldCup',
+      name: 'worldCup',
+      component: worldCup
     },
   ]
 })
