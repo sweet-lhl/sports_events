@@ -35,7 +35,7 @@ content > *:first-child {
 }
 
 .cont-naw {
-    font-size: .83rem;
+    font-size: 2rem;
     color: white;
     margin-top: .1rem;
     line-height: 2rem;
@@ -70,7 +70,7 @@ content > *:first-child {
 /*国际赛事赛事资料库*/
 
 .international > * {
-    font-size: 1rem;
+    font-size: 1.66rem;
     line-height: 2.905rem;
     margin-bottom: .4rem;
     color: #517fe1;
@@ -92,11 +92,12 @@ content > *:first-child {
     float: right;
     text-align: right;
 }
-
+.match-item>*{
+  font-size: 1.4rem;
+}
 .match-item > *:not(:first-child), .table-match > * {
     color: black;
     width: 60%;
-    font-size: 1rem;
     border-radius: .2rem;
 }
 
@@ -114,7 +115,8 @@ content > *:first-child {
 }
 
 .classification {
-    font-size: .95rem;
+    font-size: 1.5rem;
+  align-items: center;
     padding: .2rem .5rem;
     margin: 0 !important;
     background-color: #313251;
@@ -126,8 +128,11 @@ content > *:first-child {
 }
 
 .classification > *:last-child > * {
+  height: 100%;
+  font-size: 1rem;
+  line-height: 100%;
     display: inline-block;
-    padding: .2rem .4rem;
+    padding: .5rem .4rem;
     border-radius: .2rem;
 }
 .classification > *:last-child > *:last-child{
@@ -155,7 +160,7 @@ table {
     table-layout: fixed;
     width: 98%;
     margin: .4rem auto;
-    font-size: .95rem;
+    font-size: 1.5rem;
     text-align: center;
     border: 1px solid rgba(210, 210, 210, 0.5);
 }
@@ -169,6 +174,7 @@ thead > * {
     background-color: #517fe1;
     line-height: 1.66rem;
     color: white;
+  font-size: 1.66rem;
 }
 
 .thead-ellipsis {
@@ -178,7 +184,9 @@ thead > * {
 .thead-ball {
     width: 30%;
 }
-
+tfoot>tr>th{
+  font-size: 1rem;
+}
 tbody > *, tfoot {
     width: 100%;
     line-height: 2.5rem;
@@ -204,11 +212,15 @@ tbody > *, tfoot {
 #table-integral>*:first-child > tbody > *:last-child > *:nth-child(2),#table-integral>*:first-child > tbody > *:nth-last-child(2) > *:nth-child(2) {
     background-color: #b1a7a7;
 }
+td{
+  font-size: 1rem;
+}
 
 .ranking {
     text-align: left;
     margin-left: 1.5rem;
     line-height: 1.2rem;
+  font-size: 1rem;
 }
 
 .ranking > * {
@@ -222,7 +234,7 @@ tbody > *, tfoot {
     width: .3rem;
     height: .6rem;
     position: absolute;
-    top: 35%;
+    top: .2rem;
     left: -.6rem;
     background-color: black;
 }
@@ -260,10 +272,12 @@ tbody > * > *:first-child > * ,.score>*{
 }
 
 .td-red {
+  font-size: 1rem;
     color: #fe9591;
 }
 
 .td-blue {
+  font-size: 1rem;
     color: #497cff;
 }
 

@@ -2,8 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueResource from 'vue-resource'
 import Footer from '../assets/template/footer'
+import mainNavigation from '../assets/template/mainNavigation'
+import YDUI from 'vue-ydui'//document=>http://vue.ydui.org/docs/#/tab
+import 'vue-ydui/dist/ydui.rem.css';
 
-Vue.component('my-footer', Footer)
+Vue.use(YDUI);
+Vue.component('my-footer', Footer);
+Vue.component('mainNavigation', mainNavigation);
 
 Vue.use(VueResource);
 Vue.use(Router);

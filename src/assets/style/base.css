@@ -215,7 +215,7 @@ html {
 body {
     overflow-y: scroll;
     height: 100%;
-    font-size: 12px;
+    font-size: 2rem;
     margin: 0
 }
 
@@ -872,4 +872,8 @@ table {
 
 td, th {
     padding: 0
+}
+select {
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
 }

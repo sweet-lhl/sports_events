@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div class="head">
+    <!--<div class="head">
       <div class="head_nav">
         <div class="head_logo"><a href="index.html"><img src="../assets/images/img04.png"></a></div>
         <div class="head_nav_list">
@@ -13,8 +13,8 @@
           <div class="head_nav_up" @click.captrue="setup=!setup;setupMark=!setupMark"><img src="../assets/images/img01.png"></div>
         </div>
       </div>
-
-    </div>
+    </div>-->
+    <mainNavigation></mainNavigation>
     <!--设置-->
     <div v-if="setup===true">
       <div class="cont setbg">

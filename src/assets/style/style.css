@@ -546,6 +546,9 @@ a{text-decoration: inherit;}
 .head_childnavtwo ul li p:first-child{
   margin-top: 0.25rem;
 }
+.head_childnavtwo ul li p{
+  font-size: 1rem;
+}
 .listvs .listtop_right a{
   bottom: -0.8rem;
 }
@@ -607,6 +610,7 @@ a{text-decoration: inherit;}
 }
 .news_cont{
   width: 100%;
+  font-size: 1rem;
   height: 3.33rem;
   color: #8B8994;
   line-height: 1.66rem;
@@ -919,6 +923,7 @@ a{text-decoration: inherit;}
 .check{
   float: right;
   color: #fff;
+  font-size: 1rem;
   padding: 2px 10px;
   margin-right: 0.66rem;
   border-radius:0.2rem;

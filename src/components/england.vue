@@ -28,7 +28,7 @@
             <table>
               <thead>
               <tr>
-                <th>排名</th>
+                <th style="width: 10%">排名</th>
                 <th class="thead-ball">球队</th>
                 <th>赛</th>
                 <th>胜</th>
