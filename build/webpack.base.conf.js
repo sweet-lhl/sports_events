@@ -1,7 +1,10 @@
 'use strict'
 const path = require('path')
+const glob = require('glob');//node的glob对象使用
 const utils = require('./utils')
 const config = require('../config')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
+const PurifyCSSPlugin = require("purifycss-webpack");//消除未使用的CSS
 const vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
@@ -67,6 +70,18 @@ module.exports = {
       }
     ]
   },
+  plugins:[
+    new PurifyCSSPlugin({ //消除未使用的CSS
+      // Give paths to parse for rules. These should be absolute!
+      paths: glob.sync(path.join(__dirname, '*.html')),
+    }),
+    new PrerenderSpaPlugin(
+      // Absolute path to compiled SPA
+      path.join(__dirname, '../dist'),
+      // List of routes to prerender
+      [ '/', '/about', '/contact' ]
+    )
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

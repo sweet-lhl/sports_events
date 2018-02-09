@@ -1,7 +1,7 @@
 <template>
     <div id="mainNavigation">
       <div class="mainNavigation flex-box align-center">
-        <div @click.capture="setUp=false"><img src="../images/img04.png"></div>
+        <div @click.capture="setUp=false"><img src="../images/img04.png"><a href="#"></a></div>
         <div>
           <div class="flex-box">
             <span :class="[ballGame===''?'active':'']" @click.capture="ballGame='';setUp=false">足球</span>
@@ -67,6 +67,13 @@
         </div>
         <my-footer></my-footer>
       </div>
+     <!-- <div class="flex-box col-2 text-center cont-naw">
+        <div :class="[tabKey===''?'active_nav':'']" @click.capture="tabKey=''">即时</div>
+        <div :class="[tabKey===1?'active_nav':'']" @click.capture="$router.push({path:'/schedule'})">赛程</div>
+        <div :class="[tabKey===2?'active_nav':'']" @click.capture="$router.push({path:'/prospect'})">前瞻</div>
+        <div :class="[tabKey===3?'active_nav':'']" @click.capture="$router.push({path:'/dataCeania'})">资料</div>
+        <div :class="[tabKey===4?'active_nav':'']" @click.capture="$router.push({path:'/mark'})">指数</div>
+      </div>-->
     </div>
 </template>
 
@@ -77,6 +84,7 @@
         return {
           msg: 'Welcome to Your Vue.js App',
          ballGame:'',//球类导航
+          tabKey:'',//福导航切换
           setUp:false,//设置开关
         }
       },
@@ -88,6 +96,7 @@
       },
       methods: {//事件
         linkToC(e) {
+          this.setUp=false;
           this.$dialog.toast({
               mes: `暂未开通此功能`,
               timeout: 1500,
@@ -156,6 +165,9 @@
     color: #e83f36;
     background-color: #ffffff;
   }
+  .active_nav{
+        background-color: rgb(65,67,107);
+  }
   .setUP{
     position: absolute;
     top: 3.75rem;
@@ -170,6 +182,10 @@
     right: 0;
     left: 0;
     bottom:0;
+  }
+  .cont-naw>*{
+    font-size: 1.33rem;
+    line-height: 3.16rem;
   }
 
 </style>

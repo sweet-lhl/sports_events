@@ -1,0 +1,59 @@
+{
+  "seller":{
+    "name":"火龙管",
+    "description":"hello word",
+    "score":"hell",
+    "supports":[
+      {
+        "type":0,
+        "description":"hello word"
+      },{
+        "type":1,
+        "description":"word"
+      },{
+        "type":2,
+        "description":"单人套餐"
+      },{
+        "type":3,
+        "description":"啦啦啦"
+      },{
+        "type":4,
+        "description":"已加入"
+      }
+    ]
+  },
+  "goods":{
+    "name":"怎么没出来呢",
+    "description":"hello word",
+    "score":"hell",
+    "supports":[
+      {
+        "type":0,
+        "description":"hello word"
+      },{
+        "type":1,
+        "description":"word"
+      },{
+        "type":2,
+        "description":"单人套餐"
+      }
+    ]
+  },
+  "ratings":{
+    "name":"123546",
+    "description":"hello word",
+    "score":"hell",
+    "supports":[
+      {
+        "type":0,
+        "description":"hello word"
+      },{
+        "type":1,
+        "description":"word"
+      },{
+        "type":2,
+        "description":"单人套餐"
+      }
+    ]
+  }
+}

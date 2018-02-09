@@ -33,7 +33,7 @@ Object.assign(Vue.prototype, { // VUE内置对象扩展
     for (let x in ag[1]) {
       data.append(x, ag[1][x])
     }
-    return this.$http.post(`/shop/${ag[0]}`, data)
+    return this.$http.get(`/api/${ag[0]}`, data)
   },
   _output(e){
     console.group(`%ctitle：${e.title}`,'color:#0114fb;background-color:#01fb09');//打印分组

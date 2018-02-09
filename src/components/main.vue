@@ -1,79 +1,7 @@
 <template>
   <div id="home">
-    <!--<div class="head">
-      <div class="head_nav">
-        <div class="head_logo"><a href="index.html"><img src="../assets/images/img04.png"></a></div>
-        <div class="head_nav_list">
-          <div class="head_nav_word active">足球</div>
-          <div class="head_nav_word">篮球</div>
-          <div class="clear"></div>
-        </div>
-        <div class="head_nav_set">
-          <div class="head_nav_screen"><img src="../assets/images/img02.png"></div>
-          <div class="head_nav_up" @click.captrue="setup=!setup;setupMark=!setupMark"><img src="../assets/images/img01.png"></div>
-        </div>
-      </div>
-    </div>-->
     <mainNavigation></mainNavigation>
-    <!--设置-->
-    <div v-if="setup===true">
-      <div class="cont setbg">
-        <div class="setup_title">提示设置</div>
-        <div class="setup_cont">
-          <div class="setup_list">
-            <div class="setup_list_left">进球提示</div>
-            <div class="setup_list_right"><span><input type="checkbox" name="">声音</span><span><input type="checkbox"
-                                                                                                     name="">弹窗</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <div class="setup_list">
-            <div class="setup_list_left">红牌提示</div>
-            <div class="setup_list_right"><span><input type="checkbox" name="">声音</span><span><input type="checkbox"
-                                                                                                     name="">弹窗</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div class="setup_title">首页设置</div>
-        <div class="setup_cont">
-          <div class="setup_list">
-            <div class="setup_list_left">黄牌显示</div>
-            <div class="setup_list_right"><span><input type="checkbox" name="">黄牌</span></div>
-            <div class="clear"></div>
-          </div>
-          <div class="setup_list">
-            <div class="setup_list_left">排名提示</div>
-            <div class="setup_list_right"><span><input type="checkbox" name="">排名</span></div>
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div class="setup_title">其他设置</div>
-        <div class="setup_cont">
-          <div class="setup_list">
-            <div class="setup_list_left">语言提示</div>
-            <div class="setup_list_right"><span><input type="checkbox" name="">简体</span><span><input type="checkbox"
-                                                                                                     name="">繁体</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-          <div class="setup_list">
-            <div class="setup_list_left">页面间隔刷新</div>
-            <div class="setup_list_right">
-					<span>
-						<select>
-							<option>5秒</option>
-							<option>7秒</option>
-							<option>10秒</option>
-						</select>
-					</span>
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div  v-if="setupMark===true">
+    <div>
       <div class="head_childnav">
         <ul>
           <li class="active"><a href="#">即时</a></li>
@@ -88,7 +16,7 @@
             <router-link tag="a" to="/mark">指数</router-link>
             <!--<a @click.captrue="mark=true;setupMark=false">指数</a>-->
           </li>
-          <div class="screen"><a @click.captrue="screen=!screen">筛选</a></div>
+          <div class="screen" :class="[screen?'active':'']"><a @click.captrue="screen=!screen">筛选</a></div>
         </ul>
       </div>
       <div v-if="instantDetails===false">
@@ -1660,9 +1588,31 @@
         totalSwitch:true,//公司&赛事总开关
         cancel:false,//取消
         instantDetails:false,//即时详情
-        setupMark:true,//主页
         setup: false,//设置
+        getGameList:[],
       }
+    },
+    created() {
+      this.$on('getGameList', msg => { // 获取游戏列表
+        this._api('seller', {}).then(r => {
+          r.status === 200 ? (() => {
+            r = r.body;
+            this.getGameList=r.data;
+            console.log(this.getGameList)
+          })() : (() => {
+
+          })();
+        }, e => {
+
+        });
+      });
+    },
+    mounted() {
+      this.$emit('getGameList','获取当前登录的客户信息');
+    },
+    methods: {},
+    destroyed() {
+
     }
   }
 </script>
