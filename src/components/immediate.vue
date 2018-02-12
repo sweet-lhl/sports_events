@@ -1,5 +1,6 @@
 <template>
     <div id="immediate">
+      <mainNavigation></mainNavigation>
       <div class="conttwo">
         <div class="footballvs">
           <div class="footballvs_list">
@@ -1460,7 +1461,53 @@
 
 <script>
     export default {
-        name: "immediate"
+        name: "immediate",
+      data() {
+        return {
+          msg: 'Welcome to Your Vue.js App',
+          tabKey:'',//即时详情>大小导航切换
+          getClassifyInfo:[],//赛程分类接口
+        }
+      },
+      watch: {
+
+      },
+      created() {//创建完成
+        /*this.$on('getClassifyInfo', msg => { // 赛程分类接口
+          this._api('Classify/getClassifyInfo', {mid:this.$route.query.mid}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.getClassifyInfo=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });*/
+      },
+      mounted() {//组件渲染完成
+        this.$emit('getClassifyInfo','赛程分类接口');
+      },
+      methods: {//事件
+        linkToC(e) {
+          this.$dialog.toast({
+            mes: `暂未开通此功能`,
+            timeout: 1500,
+            icon: 'error'
+          })
+        },
+
+      }
     }
 </script>
 

@@ -42,7 +42,52 @@
 
 <script>
     export default {
-        name: "prospect"
+        name: "prospect",
+      data() {
+        return {
+          msg: 'Welcome to Your Vue.js App',
+          getListArticle:[],//栏目列表文章
+        }
+      },
+      watch: {
+
+      },
+      created() {//创建完成
+        this.$on('getListArticle', msg => { // 栏目列表文章
+          this._api('Wapcate/getListArticle', {catid:this.$route.query.cid}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.getListArticle=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+      },
+      mounted() {//组件渲染完成
+        this.$emit('getListArticle','栏目列表文章');
+      },
+      methods: {//事件
+        linkToC(e) {
+          this.$dialog.toast({
+            mes: `暂未开通此功能`,
+            timeout: 1500,
+            icon: 'error'
+          })
+        },
+
+      }
     }
 </script>
 

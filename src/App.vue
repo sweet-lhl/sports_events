@@ -7,6 +7,9 @@
 <script>
 export default {
   name: 'App',
+  created(){
+    this.$router.replace('/main')// 禁止記住歷史，提供全屏方案的主文件不需要一個歷史紀錄！
+  },
   updated() {
     let number = 1;
     try {

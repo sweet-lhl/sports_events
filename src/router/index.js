@@ -20,6 +20,7 @@ const main = r => require.ensure([], () => r(require('../components/main.vue')),
   prospectDetail = r => require.ensure([], () => r(require('../components/prospectDetail.vue')), 'main'),//前瞻详情
   mark = r => require.ensure([], () => r(require('../components/mark.vue')), 'main'),//指数
   dataInternational = r => require.ensure([], () => r(require('../components/dataInternational.vue')), 'main'),//赛事资料库
+  international = r => require.ensure([], () => r(require('../components/international.vue')), 'main'),//搜索展示赛事资料库
   preselection = r => require.ensure([], () => r(require('../components/preselection.vue')), 'main'),//赛程赛果
   worldCup = r => require.ensure([], () => r(require('../components/worldCup.vue')), 'main'),//赛程赛果&&小组赛
   england = r => require.ensure([], () => r(require('../components/england.vue')), 'main'),//积分，赛程，大小射手榜
@@ -28,7 +29,7 @@ const main = r => require.ensure([], () => r(require('../components/main.vue')),
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/main',
       name: 'main',
       component: main
     },{
@@ -75,6 +76,10 @@ export default new Router({
       path: '/worldCup',
       name: 'worldCup',
       component: worldCup
+    },{
+      path: '/international',
+      name: 'international',
+      component: international
     },
   ]
 })

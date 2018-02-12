@@ -2,7 +2,7 @@
   <div id="home">
     <mainNavigation></mainNavigation>
     <div>
-      <div class="head_childnav">
+      <!--<div class="head_childnav">
         <ul>
           <li class="active"><a href="#">即时</a></li>
           <li>
@@ -14,11 +14,11 @@
           <li><router-link tag="a" to="/dataCeania">资料</router-link></li>
           <li>
             <router-link tag="a" to="/mark">指数</router-link>
-            <!--<a @click.captrue="mark=true;setupMark=false">指数</a>-->
+            &lt;!&ndash;<a @click.captrue="mark=true;setupMark=false">指数</a>&ndash;&gt;
           </li>
           <div class="screen" :class="[screen?'active':'']"><a @click.captrue="screen=!screen">筛选</a></div>
         </ul>
-      </div>
+      </div>-->
       <div v-if="instantDetails===false">
         <div v-if="screen===true">
           <div class="mark_screen_cont">
@@ -48,65 +48,23 @@
         </div>
         <div class="cont">
           <ul id="football">
-            <li>
+            <li v-for="x in getSchedule" :key="x.id">
               <div class="listtop">
-                <div class="listtop_left">澳洲超</div>
-                <div class="listtop_mobile">14:30</div>
-                <div class="listtop_right"><span class="stone">未开</span></div>
+                <div class="listtop_left" v-text="x.cname">澳洲超</div>
+                <div class="listtop_mobile">{{`${new Date(x.start_time).getHours()}:${new Date(x.start_time).getMinutes()}`}}</div>
+                <div class="listtop_right">
+                  <span :class="[x.status===0?'stone':x.status===1?'sttwo':x.status===2?'stthree':'stfour']" class="stone">
+                    {{x.status===0?'未开':x.status===0?'进行':x.status===0?'结束':'推迟'}}
+                  </span>
+                </div>
                 <div class="clear"></div>
               </div>
-              <div class="listvs">
-                <div class="listtop_left"><span>墨尔本城</span></div>
-                <div class="listtop_mobile"><span>2-1</span></div>
-                <div class="listtop_right"><span>新城宝联队</span><a @click.captrue="instantDetails=true">>></a></div>
+              <div class="listvs" @click.capture="$router.push({path:'/immediate',query:{mid:1}})">
+                <div class="listtop_left"><span v-text="x.home_team"></span></div>
+                <div class="listtop_mobile"><span v-text="x.total_score"></span></div>
+                <div class="listtop_right"><span v-text="x.visiting_team"></span><a>>></a></div>
                 <div class="clear"></div>
               </div>
-
-            </li>
-            <li>
-              <div class="listtop">
-                <div class="listtop_left">澳洲超</div>
-                <div class="listtop_mobile">14:30</div>
-                <div class="listtop_right"><span class="sttwo">进行</span></div>
-                <div class="clear"></div>
-              </div>
-              <div class="listvs">
-                <div class="listtop_left"><span>墨尔本城</span></div>
-                <div class="listtop_mobile"><span>2-1</span></div>
-                <div class="listtop_right"><span>新城宝联队</span></div>
-                <div class="clear"></div>
-              </div>
-
-            </li>
-            <li>
-              <div class="listtop">
-                <div class="listtop_left">澳洲超</div>
-                <div class="listtop_mobile">14:30</div>
-                <div class="listtop_right"><span class="stthree">结束</span></div>
-                <div class="clear"></div>
-              </div>
-              <div class="listvs">
-                <div class="listtop_left"><span>墨尔本城</span></div>
-                <div class="listtop_mobile"><span>2-1</span></div>
-                <div class="listtop_right"><span>新城宝联队</span></div>
-                <div class="clear"></div>
-              </div>
-
-            </li>
-            <li>
-              <div class="listtop">
-                <div class="listtop_left">澳洲超</div>
-                <div class="listtop_mobile">14:30</div>
-                <div class="listtop_right"><span class="stfour">推迟</span></div>
-                <div class="clear"></div>
-              </div>
-              <div class="listvs">
-                <div class="listtop_left"><span>墨尔本城</span></div>
-                <div class="listtop_mobile"><span>2-1</span></div>
-                <div class="listtop_right"><span>新城宝联队</span></div>
-                <div class="clear"></div>
-              </div>
-
             </li>
           </ul>
         </div>
@@ -1589,26 +1547,56 @@
         cancel:false,//取消
         instantDetails:false,//即时详情
         setup: false,//设置
-        getGameList:[],
+        getSchedule:[],//存放即时数据
       }
     },
     created() {
-      this.$on('getGameList', msg => { // 获取游戏列表
-        this._api('seller', {}).then(r => {
-          r.status === 200 ? (() => {
-            r = r.body;
-            this.getGameList=r.data;
-            console.log(this.getGameList)
+      this.$on('getSchedule', msg => { // 获取即时页面
+        this._api('Schedule/getSchedule', {mid:1}).then(r => {
+          r=r.body;
+          r.status === 'ok' ? (() => {
+           r=r.data;
+           this.getSchedule=r;
+           console.log(r)
           })() : (() => {
-
+            this.$dialog.toast({
+              mes: r.msg,
+              timeout: 1500,
+              icon: 'error'
+            });
           })();
         }, e => {
-
+          this.$dialog.toast({
+            mes: `${msg.msg || msg}失败`,
+            timeout: 1500,
+            icon: 'error'
+          });
         });
       });
+   /*   this.$on('getListArticle', msg => { // 即时
+        this._api('Wapcate/getListArticle', {catid:19}).then(r => {
+          r.status === 'ok' ? (() => {
+           r=r.data;
+           this.topCate=r;
+           console.log(r)
+          })() : (() => {
+            this.$dialog.toast({
+              mes: r.msg,
+              timeout: 1500,
+              icon: 'error'
+            });
+          })();
+        }, e => {
+          this.$dialog.toast({
+            mes: `${msg.msg || msg}失败`,
+            timeout: 1500,
+            icon: 'error'
+          });
+        });
+      });*/
     },
     mounted() {
-      this.$emit('getGameList','获取当前登录的客户信息');
+      this.$emit('getSchedule','获取当前即时页面');
     },
     methods: {},
     destroyed() {

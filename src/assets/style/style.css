@@ -34,7 +34,7 @@ a{text-decoration: inherit;}
   float: left;
   border-radius: 0.41rem;
   overflow: hidden;
-  margin-left: 12%; /*改动*/
+  margin-left: 16%; /*改动*/
 }
 .head_nav_set{
   height: 2.08rem;

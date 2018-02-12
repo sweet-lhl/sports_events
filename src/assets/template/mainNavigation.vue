@@ -4,10 +4,7 @@
         <div @click.capture="setUp=false"><img src="../images/img04.png"><a href="#"></a></div>
         <div>
           <div class="flex-box">
-            <span :class="[ballGame===''?'active':'']" @click.capture="ballGame='';setUp=false">足球</span>
-            <span :class="[ballGame===1?'active':'']" @click.capture="ballGame=1;setUp=false">篮球</span>
-            <span :class="[ballGame===2?'active':'']" @click.capture="linkToC">竞猜</span>
-            <span :class="[ballGame===3?'active':'']" @click.capture="linkToC">直播</span>
+            <span v-for="x in topCate" :class="[ballGame===x.id?'active':'']" @click.capture="$emit('wapcate',{tid:x.id,msg:'获取副导航'});setUp=false;ballGame=x.id;$router.push({path:'/main'})" v-text="x.name"></span>
           </div>
         </div>
         <div>
@@ -67,13 +64,13 @@
         </div>
         <my-footer></my-footer>
       </div>
-     <!-- <div class="flex-box col-2 text-center cont-naw">
-        <div :class="[tabKey===''?'active_nav':'']" @click.capture="tabKey=''">即时</div>
-        <div :class="[tabKey===1?'active_nav':'']" @click.capture="$router.push({path:'/schedule'})">赛程</div>
+      <div class="flex-box col-2 text-center cont-naw">
+        <div v-for="x in wapcate" :class="[tabKey===x.nickname?'active_nav':'']" @click.capture="$router.push({path:`/${x.nickname}`,query:{pid:x.pid}});tabKey=x.nickname" v-text="x.name"></div>
+    <!--    <div :class="[tabKey===1?'active_nav':'']" @click.capture="$router.push({path:'/schedule'})">赛程</div>
         <div :class="[tabKey===2?'active_nav':'']" @click.capture="$router.push({path:'/prospect'})">前瞻</div>
         <div :class="[tabKey===3?'active_nav':'']" @click.capture="$router.push({path:'/dataCeania'})">资料</div>
-        <div :class="[tabKey===4?'active_nav':'']" @click.capture="$router.push({path:'/mark'})">指数</div>
-      </div>-->
+        <div :class="[tabKey===4?'active_nav':'']" @click.capture="$router.push({path:'/mark'})">指数</div>-->
+      </div>
     </div>
 </template>
 
@@ -83,16 +80,65 @@
       data() {
         return {
           msg: 'Welcome to Your Vue.js App',
-         ballGame:'',//球类导航
-          tabKey:'',//福导航切换
+         ballGame:1,//球类导航
+          topCate:[],//存放球类导航数据
+          wapcate:[],//存放副导航
+          tabKey:'main',//福导航切换
           setUp:false,//设置开关
         }
       },
-      created() {//创建完成
+      watch: {
 
       },
+      created() {//创建完成
+        this.$on('topCate', msg => { // 获取主页导航
+          this._api('Wapcate/getSonId', {tid:''}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.topCate=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('wapcate', msg => { // 获取副导航
+          this._api('Wapcate/getSonId', {tid:msg.tid}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.wapcate=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+      },
       mounted() {//组件渲染完成
-
+        this.$emit('topCate','获取主页导航');
+        if(this.ballGame===1){
+          this.$emit('wapcate',{tid:1,msg:'获取副导航'});
+        }
       },
       methods: {//事件
         linkToC(e) {

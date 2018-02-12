@@ -39,7 +39,8 @@ content > *:first-child {
     color: white;
     margin-top: .1rem;
     line-height: 2rem;
-    background-color: #2a2b47;
+  background: url(../images/img05.png) no-repeat center;
+  background-size: 100% 100%;
 }
 
 .con-list {
