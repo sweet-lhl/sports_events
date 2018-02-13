@@ -7,32 +7,16 @@
         </header>
         <div class="head_childnavthree">
           <ul>
-            <li  class="active">
-              要闻
-            </li>
-            <li>
-              足球
-            </li>
-            <li>
-              足彩
-            </li>
-            <li>
-              篮球
-            </li>
+            <li v-for="x in gettreeId" :class="[screenNav===x.name?'active':'']" v-text="x.name" @click.capture="$emit('getListArticle',{catid:x.id,msg:'导航'});screenNav=x.name"></li>
           </ul>
         </div>
       </div>
       <div class="cont">
         <ul id="news">
-          <li>
-            <div class="news_title">印度再度上调电子产品关税，苹果公司受影响最大</div>
-            <div class="news_cont">驱动中国2018年2月2日消息 在国内手机市场陷入血海纷争的时候，作为第二人口大国的印度成了厂商眼中的香饽饽。</div>
-            <div class="news_detail"><a @click.capture="$router.push({path:'/prospectDetail'})">2018-02-01 10:00 详细>></a><div class="clear"></div></div>
-          </li>
-          <li>
-            <div class="news_title">印度再度上调电子产品关税，苹果公司受影响最大</div>
-            <div class="news_cont">驱动中国2018年2月2日消息 在国内手机市场陷入血海纷争的时候，作为第二人口大国的印度成了厂商眼中的香饽饽。</div>
-            <div class="news_detail"><a href="prospect_detail.html">2018-02-01 10:00 详细>></a><div class="clear"></div></div>
+          <li v-for="x in getListArticle" @click.capture="$router.replace({path:'/prospectDetail',query:{id:x.id}})">
+            <div class="news_title" v-text="x.title"></div>
+            <div class="news_cont" v-text="x.intro"></div>
+            <div class="news_detail"><a>{{x.createtime.getTime()}} 详细>></a><div class="clear"></div></div>
           </li>
         </ul>
       </div>
@@ -46,6 +30,8 @@
       data() {
         return {
           msg: 'Welcome to Your Vue.js App',
+          screenNav:'要闻',
+          gettreeId:[],//导航
           getListArticle:[],//栏目列表文章
         }
       },
@@ -53,11 +39,34 @@
 
       },
       created() {//创建完成
-        this.$on('getListArticle', msg => { // 栏目列表文章
-          this._api('Wapcate/getListArticle', {catid:this.$route.query.cid}).then(r => {
+        this.$on('gettreeId', msg => { // 导航
+          this._api('Wapcate/gettreeId', {sid:this.$route.query.id}).then(r => {
             r=r.body;
             r.status === 'ok' ? (() => {
               r=r.data;
+              this.gettreeId=r;
+              console.log(this.gettreeId)
+              this.$emit('getListArticle',{catid:this.gettreeId[0].id,msg:'栏目列表文章'});
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('getListArticle', msg => { // 栏目列表文章
+          this._api('Wapcate/getListArticle', {catid:msg.catid,size:99}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data.data;
               this.getListArticle=r;
             })() : (() => {
               this.$dialog.toast({
@@ -76,7 +85,7 @@
         });
       },
       mounted() {//组件渲染完成
-        this.$emit('getListArticle','栏目列表文章');
+        this.$emit('gettreeId','导航');
       },
       methods: {//事件
         linkToC(e) {

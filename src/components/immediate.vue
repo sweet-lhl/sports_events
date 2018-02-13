@@ -1466,15 +1466,14 @@
         return {
           msg: 'Welcome to Your Vue.js App',
           tabKey:'',//即时详情>大小导航切换
-          getClassifyInfo:[],//赛程分类接口
         }
       },
       watch: {
 
       },
       created() {//创建完成
-        /*this.$on('getClassifyInfo', msg => { // 赛程分类接口
-          this._api('Classify/getClassifyInfo', {mid:this.$route.query.mid}).then(r => {
+        this.$on('getClassifyInfo', msg => { // 赛程分类接口
+          this._api('Classify/getClassifyInfo', {mid:this.$route.query.id}).then(r => {
             r=r.body;
             r.status === 'ok' ? (() => {
               r=r.data;
@@ -1493,7 +1492,7 @@
               icon: 'error'
             });
           });
-        });*/
+        });
       },
       mounted() {//组件渲染完成
         this.$emit('getClassifyInfo','赛程分类接口');

@@ -4,11 +4,11 @@
         <div @click.capture="setUp=false"><img src="../images/img04.png"><a href="#"></a></div>
         <div>
           <div class="flex-box">
-            <span v-for="x in topCate" :class="[ballGame===x.id?'active':'']" @click.capture="$emit('wapcate',{tid:x.id,msg:'获取副导航'});setUp=false;ballGame=x.id;$router.push({path:'/main'})" v-text="x.name"></span>
+            <span v-for="x in topCate" :class="[ballGame===x.id?'active':'']" @click.capture="$emit('wapcate',{tid:x.id,msg:'获取副导航'});setUp=false;ballGame=x.id;$router.push({path:'/main',query:{id:x.id}})" v-text="x.name"></span>
           </div>
         </div>
         <div>
-          <img src="../images/img02.png">
+          <img @click.capture="$router.push({path:'/main',query:{screen:screen}});screen=!screen" src="../images/img02.png">
           <img @click.capture="setUp=!setUp" src="../images/img01.png">
         </div>
       </div>
@@ -65,7 +65,7 @@
         <my-footer></my-footer>
       </div>
       <div class="flex-box col-2 text-center cont-naw">
-        <div v-for="x in wapcate" :class="[tabKey===x.nickname?'active_nav':'']" @click.capture="$router.push({path:`/${x.nickname}`,query:{pid:x.pid}});tabKey=x.nickname" v-text="x.name"></div>
+        <div v-for="x in wapcate" :class="[tabKey===x.nickname?'active_nav':'']" @click.capture="$router.push({path:`/${x.nickname}`,query:{pid:x.pid,id:x.id}});tabKey=x.nickname" v-text="x.name"></div>
     <!--    <div :class="[tabKey===1?'active_nav':'']" @click.capture="$router.push({path:'/schedule'})">赛程</div>
         <div :class="[tabKey===2?'active_nav':'']" @click.capture="$router.push({path:'/prospect'})">前瞻</div>
         <div :class="[tabKey===3?'active_nav':'']" @click.capture="$router.push({path:'/dataCeania'})">资料</div>
@@ -85,6 +85,7 @@
           wapcate:[],//存放副导航
           tabKey:'main',//福导航切换
           setUp:false,//设置开关
+          screen:true,//筛选
         }
       },
       watch: {

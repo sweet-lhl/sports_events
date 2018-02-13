@@ -23,7 +23,7 @@ Object.assign(Number.prototype, {
   getTime () { // 时间戳转时间[单位:s]
     // this = 1330870514;
     let date = new Date(this * 1000)
-    return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}  ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   }
 });
 Object.assign(Vue.prototype, { // VUE内置对象扩展
