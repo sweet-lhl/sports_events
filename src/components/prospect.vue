@@ -12,13 +12,14 @@
         </div>
       </div>
       <div class="cont">
-        <ul id="news">
+        <ul id="news" v-if="getListArticle.length>0">
           <li v-for="x in getListArticle" @click.capture="$router.replace({path:'/prospectDetail',query:{id:x.id}})">
             <div class="news_title" v-text="x.title"></div>
             <div class="news_cont" v-text="x.intro"></div>
             <div class="news_detail"><a>{{x.createtime.getTime()}} 详细>></a><div class="clear"></div></div>
           </li>
         </ul>
+        <div v-else class="nodata">暂无数据</div>
       </div>
       <my-footer></my-footer>
     </div>

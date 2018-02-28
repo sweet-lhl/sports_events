@@ -35,6 +35,9 @@ Object.assign(Vue.prototype, { // VUE内置对象扩展
     }
     return this.$http.post(`/api/${ag[0]}`, data)
   },
+  _appendZero(e) {//不足两位数自动加0
+    return e<10?`0${e}`:e;
+  },
   _output(e){
     console.group(`%ctitle：${e.title}`,'color:#0114fb;background-color:#01fb09');//打印分组
     console.info(`%cfrom：${document.title}`,'background-color:#077aec');

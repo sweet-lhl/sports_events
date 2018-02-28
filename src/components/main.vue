@@ -2,23 +2,6 @@
   <div id="home">
     <mainNavigation></mainNavigation>
     <div>
-      <!--<div class="head_childnav">
-        <ul>
-          <li class="active"><a href="#">即时</a></li>
-          <li>
-            <router-link tag="a" to="/schedule">赛程</router-link>
-          </li>
-          <li>
-            <router-link tag="a" to="/prospect">前瞻</router-link>
-          </li>
-          <li><router-link tag="a" to="/dataCeania">资料</router-link></li>
-          <li>
-            <router-link tag="a" to="/mark">指数</router-link>
-            &lt;!&ndash;<a @click.captrue="mark=true;setupMark=false">指数</a>&ndash;&gt;
-          </li>
-          <div class="screen" :class="[screen?'active':'']"><a @click.captrue="screen=!screen">筛选</a></div>
-        </ul>
-      </div>-->
         <div v-if="$route.query.screen===true">
           <div class="mark_screen_cont">
             <div v-for="x in getClassifyInfo" class="mark_screen_list" :class="[selectAll?'':'active']" @click.capture="selectAll=false" v-text="x.name"></div>
@@ -45,15 +28,15 @@
             <li v-for="x in getSchedule" :key="x.id">
               <div class="listtop">
                 <div class="listtop_left" v-text="x.cname">澳洲超</div>
-                <div class="listtop_mobile">{{`${new Date(x.start_time*1000).getHours()}:${new Date(x.start_time*1000).getMinutes()}`}}</div>
+                <div class="listtop_mobile">{{`${_appendZero(new Date(x.start_time*1000).getHours())}:${_appendZero(new Date(x.start_time*1000).getMinutes())}`}}</div>
                 <div class="listtop_right">
-                  <span :class="[x.status===0?'stone':x.status===1?'sttwo':x.status===2?'stthree':'stfour']" class="stone">
-                    {{x.status===0?'未开':x.status===0?'进行':x.status===0?'结束':'推迟'}}
+                  <span :class="[x.status==0?'stone':x.status==1?'sttwo':x.status==2?'stthree':'stfour']">
+                    {{x.status==0?'未开':x.status==1?'进行':x.status==2?'结束':'推迟'}}
                   </span>
                 </div>
                 <div class="clear"></div>
               </div>
-              <div class="listvs" @click.capture="$router.push({path:'/immediate',query:{mid:1}})">
+              <div class="listvs" @click.capture="$router.push({path:'/immediate',query:{id:x.id}})">
                 <div class="listtop_left"><span v-text="x.home_team"></span></div>
                 <div class="listtop_mobile"><span v-text="x.total_score"></span></div>
                 <div class="listtop_right"><span v-text="x.visiting_team"></span><a>>></a></div>
@@ -79,26 +62,19 @@
         selectAll:true,//筛选>全选&&全不选
         getSchedule:[],//存放即时数据
         getClassifyInfo:[],//赛程分类接口
-        mid:this.$route.query.id||1,//导航id
       }
     },
     watch: {
-      mid(){
-        this.$nextTick(() => {
-          console.log(mid)
-          this.getSchedule=[];
-          this.$emit('getSchedule',{mid:this.mid,msg:'获取当前即时页面'});
-        })
-      },
+      "$route": "fetchDate"
     },
     created() {
       this.$on('getSchedule', msg => { // 获取即时页面
-        this._api('Schedule/getSchedule', {mid:this.mid}).then(r => {
+        this._api('Schedule/getSchedule', {mid:msg.mid||1}).then(r => {
           r=r.body;
           r.status === 'ok' ? (() => {
-            console.log(this.mid)
            r=r.data;
            this.getSchedule=r;
+            console.log(this.$route.query.id)
            console.log(r)
           })() : (() => {
             this.$dialog.toast({
@@ -116,7 +92,7 @@
         });
       });
       this.$on('getClassifyInfo', msg => { // 赛程分类接口
-        this._api('Classify/getClassifyInfo', {mid:this.mid}).then(r => {
+        this._api('Classify/getClassifyInfo', {mid:msg.mid||1}).then(r => {
           r=r.body;
           r.status === 'ok' ? (() => {
             r=r.data;
@@ -162,7 +138,12 @@
       this.$emit('getSchedule','获取当前即时页面');
       this.$emit('getClassifyInfo','赛程分类接口');
     },
-    methods: {},
+    methods: {
+      fetchDate(){
+        this.getSchedule=[];
+        this.$emit('getSchedule',{mid:this.$route.query.pid||this.$route.query.id,msg:'获取当前即时页面'});
+      }
+    },
     destroyed() {
 
     }

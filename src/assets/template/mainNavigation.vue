@@ -8,7 +8,7 @@
           </div>
         </div>
         <div>
-          <img @click.capture="$router.push({path:'/main',query:{screen:screen}});screen=!screen" src="../images/img02.png">
+          <img @click.capture="$router.push({path:'/main',query:{screen:screen,id:ballGame}});screen=!screen" src="../images/img02.png">
           <img @click.capture="setUp=!setUp" src="../images/img01.png">
         </div>
       </div>

@@ -4,17 +4,19 @@
       <div class="conttwo">
         <div class="footballvs">
           <div class="footballvs_list">
-            <div class="footballvs_list_img"><img src="../assets/images/img08.png"></div>
-            <div class="footballvs_list_name">墨尔本城</div>
+            <div class="footballvs_list_img"><img :src="ScheduleDetails.h_img"></div>
+            <div class="footballvs_list_name" v-text="ScheduleDetails.home_team"></div>
           </div>
           <div class="footballvs_list">
             <div class="footballvs_list_vs">VS</div>
-            <div class="footballvs_list_time">2018-02-01 15:30</div>
-            <div class="footballvs_list_status"><span class="stone">未开</span></div>
+            <div class="footballvs_list_time" v-text="parseInt(ScheduleDetails.start_time).getTime()"></div>
+            <div class="footballvs_list_status"><span :class="[ScheduleDetails.status==0?'stone':ScheduleDetails.status==1?'sttwo':ScheduleDetails.status==2?'stthree':'stfour']">
+              {{ScheduleDetails.status==0?'未开':ScheduleDetails.status==1?'进行':ScheduleDetails.status==2?'结束':'推迟'}}
+            </span></div>
           </div>
           <div class="footballvs_list">
-            <div class="footballvs_list_img"><img src="../assets/images/img09.png"></div>
-            <div class="footballvs_list_name">新城堡联队</div>
+            <div class="footballvs_list_img"><img :src="ScheduleDetails.v_img"></div>
+            <div class="footballvs_list_name" v-text="ScheduleDetails.visiting_team"></div>
           </div>
           <div class="clear"></div>
         </div>
@@ -30,149 +32,83 @@
         </div>
         <div class="cont">
           <div v-if="tabKey===''">
-            <div class="fenxiBar">
-              【比赛事件】
-            </div>
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
-              <tbody>
-              <tr>
-                <td width="45%" align="right">&nbsp;<img src="../assets/images/img10.png" class="sjImg">Badocha</td>
-                <td width="10%" class="huibg" align="center">40</td>
-                <td width="45%" align="left">
-                </td>
-              </tr>
-              <tr>
-                <td width="45%" align="right">&nbsp;</td>
-                <td width="10%" class="huibg" align="center">53</td>
-                <td width="45%" align="left">Musiol<img src="../assets/images/img10.png" class="sjImg"></td>
-              </tr>
-              <tr>
-                <td width="45%" align="right">&nbsp;<img src="../assets/images/img11.png" class="sjImg">&nbsp;</td>
-                <td width="10%" class="huibg" align="center">77</td>
-                <td width="45%" align="left">
-                </td>
-              </tr>
-              <tr>
-                <td width="45%" align="right">&nbsp;<img src="../assets/images/img12.png" class="sjImg">&nbsp;</td>
-                <td width="10%" class="huibg" align="center">89</td>
-                <td width="45%" align="left">
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" align="center"><img src="../assets/images/img10.png" class="sjImg">入球&nbsp;<img src="../assets/images/img11.png" class="sjImg">点球&nbsp;<img src="../assets/images/img12.png" class="sjImg">乌龙&nbsp;<img src="../assets/images/img13.png" class="sjImg">两黄变红&nbsp;<img src="../assets/images/img15.png" class="sjImg">换人</td>
-              </tr>
+            <!--比赛事件-->
+           <div v-if="ScheduleEvent.length>0">
+             <div class="fenxiBar">
+               【比赛事件】
+             </div>
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
+               <tbody>
+               <tr v-for="x in ScheduleEvent">
+                 <td width="45%" align="right">&nbsp;<span v-if="x.home_team==1"><img :src="x.eimg" class="sjImg">{{x.pname}}</span></td>
+                 <td width="10%" class="huibg" align="center">{{`${_appendZero(new Date(x.time*1000).getHours())}:${_appendZero(new Date(x.time*1000).getMinutes())}`}}</td>
+                 <td width="45%" align="left"><span v-if="x.home_team==0">{{x.pname}}<img :src="x.eimg" class="sjImg"></span></td>
+               </tr>
+               <tr>
+                 <td colspan="3" align="center">
+                   <span v-for="x in EventList"><img :src="x.img" class="sjImg">{{x.name}}&nbsp;</span>
+                   <!-- <img src="../assets/images/img10.png" class="sjImg">入球&nbsp;-->
+                 </td>
+               </tr>
 
-              </tbody>
-            </table>
-            <div class="fenxiBar">
-              【技术统计】
+               </tbody>
+             </table>
+           </div>
+            <!--技术统计-->
+            <div v-if="Statistics.length>0">
+              <div class="fenxiBar">
+                【技术统计】
+              </div>
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable  mytabletwo">
+                <tbody>
+                <tr align="center" v-for="x in Statistics">
+                  <td width="30%" v-text="x.home_team"></td>
+                  <td width="30%" class="huibg" v-text="x.ename"></td>
+                  <td width="30%" v-text="x.visiting_team"></td>
+                </tr>
+                </tbody>
+              </table>
             </div>
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable  mytabletwo">
-              <tbody>
-              <tr align="center">
-                <td width="30%">8</td>
-                <td width="30%" class="huibg">角球</td>
-                <td width="30%">5</td>
-              </tr>
-              <tr align="center">
-                <td width="30%">1</td>
-                <td width="30%" class="huibg">黄牌</td>
-                <td width="30%">0</td>
-              </tr>
-              <tr align="center">
-                <td width="30%">11</td>
-                <td width="30%" class="huibg">射门次数</td>
-                <td width="30%">19</td>
-              </tr>
-              <tr align="center">
-                <td width="30%">6</td>
-                <td width="30%" class="huibg">射正次数</td>
-                <td width="30%">9</td>
-              </tr>
-              <tr align="center">
-                <td width="30%">5</td>
-                <td width="30%" class="huibg">射门不中</td>
-                <td width="30%">10</td>
-              </tr>
-              </tbody>
-            </table>
-            <div class="fenxiBar">
-              【半场/全场胜负统计(近两赛季)】
-            </div>
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
-              <tbody>
-              <tr align="center">
-                <td width="15%">主场(5)</td>
-                <td width="15%">客场(18)</td>
-                <td width="30%" class="huibg">&nbsp;</td>
-                <td width="15%">主场(3)</td>
-                <td width="15%">客场(7)</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>2</td>
-                <td class="huibg">半胜/全胜</td>
-                <td>1</td>
-                <td>0</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>2</td>
-                <td class="huibg">半平/全胜</td>
-                <td>0</td>
-                <td>1</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>0</td>
-                <td class="huibg">半负/全胜</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr align="center">
-                <td>1</td>
-                <td>0</td>
-                <td class="huibg">半胜/全平</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>4</td>
-                <td class="huibg">半平/全平</td>
-                <td>0</td>
-                <td>1</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>0</td>
-                <td class="huibg">半负/全平</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>1</td>
-                <td class="huibg">半胜/全负</td>
-                <td>0</td>
-                <td>1</td>
-              </tr>
-              <tr align="center">
-                <td>0</td>
-                <td>2</td>
-                <td class="huibg">半平/全负</td>
-                <td>1</td>
-                <td>4</td>
-              </tr>
-              <tr align="center">
-                <td>4</td>
-                <td>7</td>
-                <td class="huibg">半负/全负</td>
-                <td>1</td>
-                <td>0</td>
-              </tr>
-              </tbody>
-            </table>
+            <!--【半场/全场胜负统计(近两赛季)】-->
+           <div v-if="SeasonSta.length>0">
+             <div class="fenxiBar">
+               【半场/全场胜负统计(近两赛季)】
+             </div>
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
+               <tbody>
+               <tr align="center">
+                 <td width="15%">主场({{SeasonSta.top['one']}})</td>
+                 <td width="15%">客场({{SeasonSta.top.tow}})</td>
+                 <td width="30%" class="huibg">&nbsp;</td>
+                 <td width="15%">主场({{SeasonSta.top.tree}})</td>
+                 <td width="15%">客场({{SeasonSta.top.four}})</td>
+               </tr>
+
+               <tr align="center">
+                 <td v-text="SeasonSta.bs['one']">0</td>
+                 <td v-text="SeasonSta.bs.tow">2</td>
+                 <td class="huibg" v-text="SeasonSta.bs.k"></td>
+                 <td v-text="SeasonSta.bs.tree">1</td>
+                 <td v-text="SeasonSta.bs.four">0</td>
+               </tr>
+
+               <tr align="center">
+                 <td v-text="SeasonSta.qs['one']">0</td>
+                 <td v-text="SeasonSta.qs.tow">2</td>
+                 <td class="huibg" v-text="SeasonSta.qs.k"></td>
+                 <td v-text="SeasonSta.qs.tree">1</td>
+                 <td v-text="SeasonSta.qs.four">0</td>
+               </tr>
+             <!--  <tr align="center">
+                 <td>0</td>
+                 <td>0</td>
+                 <td class="huibg">半负/全胜</td>
+                 <td>0</td>
+                 <td>0</td>
+               </tr>-->
+               </tbody>
+             </table>
+           </div>
           </div>
           <div v-if="tabKey===1" class="nodata">暂无数据</div>
           <div v-if="tabKey===2">
@@ -1466,18 +1402,115 @@
         return {
           msg: 'Welcome to Your Vue.js App',
           tabKey:'',//即时详情>大小导航切换
+          ScheduleDetails:[],//赛事详情头信息
+          ScheduleEvent:[],//赛事详情事件
+          EventList:[],//赛事事件列表
+          Statistics:[],//赛事技术统计
+          SeasonSta:[],//赛季胜负统计
+          home_team:'',//主场团队id
+          visiting_team:''//客场团队id
         }
       },
       watch: {
 
       },
       created() {//创建完成
-        this.$on('getClassifyInfo', msg => { // 赛程分类接口
-          this._api('Classify/getClassifyInfo', {mid:this.$route.query.id}).then(r => {
+        this.$on('ScheduleDetails', msg => { // 赛事详情头信息接口
+          this._api('ScheduleDetails/Scheduledetails', {mid:this.$route.query.id}).then(r => {
             r=r.body;
             r.status === 'ok' ? (() => {
               r=r.data;
-              this.getClassifyInfo=r;
+              [this.ScheduleDetails,this.home_team,this.visiting_team]=[r,r.hid,r.vid];
+              this.$emit('SeasonSta','获取赛季胜负统计');
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('ScheduleEvent', msg => { // 赛事详情事件
+          this._api('ScheduleDetails/ScheduleEvent', {mid:this.$route.query.id}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.ScheduleEvent=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('EventList', msg => { // 赛事事件列表接口
+          this._api('ScheduleDetails/EventList', {mid:this.$route.query.id}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.EventList=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('Statistics', msg => { // 赛事技术统计
+          this._api('ScheduleDetails/Statistics', {mid:this.$route.query.id}).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.Statistics=r;
+            })() : (() => {
+              this.$dialog.toast({
+                mes: r.msg,
+                timeout: 1500,
+                icon: 'error'
+              });
+            })();
+          }, e => {
+            this.$dialog.toast({
+              mes: `${msg.msg || msg}失败`,
+              timeout: 1500,
+              icon: 'error'
+            });
+          });
+        });
+        this.$on('SeasonSta', msg => { // 赛季胜负统计
+          this._api('ScheduleDetails/SeasonSta', {
+            mid:this.$route.query.id,
+            home_team:this.home_team,
+            visiting_team:this.visiting_team,
+          }).then(r => {
+            r=r.body;
+            r.status === 'ok' ? (() => {
+              r=r.data;
+              this.SeasonSta=r;
+              console.log(this.SeasonSta)
             })() : (() => {
               this.$dialog.toast({
                 mes: r.msg,
@@ -1495,7 +1528,10 @@
         });
       },
       mounted() {//组件渲染完成
-        this.$emit('getClassifyInfo','赛程分类接口');
+        this.$emit('ScheduleDetails','获取赛事详情头信息');
+        this.$emit('ScheduleEvent','获取赛事详情事件');
+        this.$emit('EventList','获取赛事事件列表');
+        this.$emit('Statistics','获取赛事技术统计');
       },
       methods: {//事件
         linkToC(e) {
