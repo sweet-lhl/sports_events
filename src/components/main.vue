@@ -36,10 +36,16 @@
                 </div>
                 <div class="clear"></div>
               </div>
-              <div class="listvs" @click.capture="$router.push({path:'/immediate',query:{id:x.id}})">
+              <div class="listvs" @click.capture="$router.push({path:`/${mid===2?'basketballImmediate':'immediate'}`,query:{id:x.id}})">
                 <div class="listtop_left"><span v-text="x.home_team"></span></div>
                 <div class="listtop_mobile"><span v-text="x.total_score"></span></div>
-                <div class="listtop_right"><span v-text="x.visiting_team"></span><a>>></a></div>
+                <div class="listtop_right"><span v-text="x.visiting_team"></span><a v-if="mid!==2">详情>></a></div>
+                <div class="clear"></div>
+              </div>
+              <div class="listodd" v-if="mid===2" @click.capture="$router.push({path:'/basketballImmediate',query:{id:x.id}})">
+                <div class="listtop_left"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span></div>
+                <div class="listtop_mobile"><img style="width: 16px" src="../assets/images/img19.png"></div>
+                <div class="listtop_right"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><a>详情>></a></div>
                 <div class="clear"></div>
               </div>
             </li>
@@ -62,6 +68,7 @@
         selectAll:true,//筛选>全选&&全不选
         getSchedule:[],//存放即时数据
         getClassifyInfo:[],//赛程分类接口
+        mid:''//存放类型id
       }
     },
     watch: {
@@ -141,7 +148,8 @@
     methods: {
       fetchDate(){
         this.getSchedule=[];
-        this.$emit('getSchedule',{mid:this.$route.query.pid||this.$route.query.id,msg:'获取当前即时页面'});
+        this.mid=this.$route.query.pid||this.$route.query.id;
+        this.$emit('getSchedule',{mid:this.mid,msg:'获取当前即时页面'});
       }
     },
     destroyed() {

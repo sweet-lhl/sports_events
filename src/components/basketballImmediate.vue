@@ -1,5 +1,5 @@
 <template>
-    <div id="immediate">
+    <div id="basketballImmediate">
       <mainNavigation></mainNavigation>
       <div class="conttwo">
         <div class="footballvs">
@@ -22,7 +22,7 @@
         </div>
         <div class="foot_child_nav">
           <ul>
-            <li :class="[tabKey===''?'active_yellow':'']" @click.capture="tabKey=''"><a>事件</a></li>
+            <li :class="[tabKey===''?'active_yellow':'']" @click.capture="tabKey=''"><a>统计</a></li>
             <li :class="[tabKey===1?'active_yellow':'']" @click.capture="tabKey=1"><a>阵容</a></li>
             <li :class="[tabKey===2?'active_yellow':'']" @click.capture="tabKey=2"><a>分析</a></li>
             <li :class="[tabKey===3?'active_yellow':'']" @click.capture="tabKey=3"><a>亚赔</a></li>
@@ -32,67 +32,147 @@
         </div>
         <div class="cont">
           <div v-if="tabKey===''">
-            <!--比赛事件-->
-           <div v-if="ScheduleEvent.length>0">
-             <div class="fenxiBar">
-               【比赛事件】
-             </div>
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
-               <tbody>
-               <tr v-for="x in ScheduleEvent">
-                 <td width="45%" align="right">&nbsp;<span v-if="x.home_team==1"><img :src="x.eimg" class="sjImg">{{x.pname}}</span></td>
-                 <td width="10%" class="huibg" align="center">{{`${_appendZero(new Date(x.time*1000).getHours())}:${_appendZero(new Date(x.time*1000).getMinutes())}`}}</td>
-                 <td width="45%" align="left"><span v-if="x.home_team==0">{{x.pname}}<img :src="x.eimg" class="sjImg"></span></td>
-               </tr>
-               <tr>
-                 <td colspan="3" align="center">
-                   <span v-for="x in EventList"><img :src="x.img" class="sjImg">{{x.name}}&nbsp;</span>
-                   <!-- <img src="../assets/images/img10.png" class="sjImg">入球&nbsp;-->
-                 </td>
-               </tr>
-
-               </tbody>
-             </table>
-           </div>
-            <!--技术统计-->
-            <div v-if="Statistics.length>0">
-              <div class="fenxiBar">
-                【技术统计】
-              </div>
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable  mytabletwo">
-                <tbody>
-                <tr align="center" v-for="x in Statistics">
-                  <td width="30%" v-text="x.home_team"></td>
-                  <td width="30%" class="huibg" v-text="x.ename"></td>
-                  <td width="30%" v-text="x.visiting_team"></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!--【半场/全场胜负统计(近两赛季)】-->
-           <div v-if="top.length>0">
-             <div class="fenxiBar">
-               【半场/全场胜负统计(近两赛季)】
-             </div>
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mytable mytabletwo">
-               <tbody>
-               <tr align="center" v-for="x in top">
-                 <td width="15%">{{x.k===''?`主场(${x.one})`:x.one}}</td>
-                 <td width="15%">{{x.k===''?`客场(${x.tow})`:x.tow}}</td>
-                 <td width="30%" class="huibg" v-text="x.k">&nbsp;</td>
-                 <td width="15%">{{x.k===''?`主场(${x.tree})`:x.tree}}</td>
-                 <td width="15%">{{x.k===''?`客场(${x.four})`:x.four}}</td>
-               </tr>
-             <!--  <tr align="center">
-                 <td>0</td>
-                 <td>0</td>
-                 <td class="huibg">半负/全胜</td>
-                 <td>0</td>
-                 <td>0</td>
-               </tr>-->
-               </tbody>
-             </table>
-           </div>
+            <table class="mytable" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>
+                <th>进行中</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>OT</th>
+              </tr>
+              <tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>8</td>
+                <td>7</td>
+                <td>5</td>
+              </tr>
+              <tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>8</td>
+                <td>7</td>
+                <td>5</td>
+              </tr>
+              </tbody>
+            </table>
+            <table style="margin-top: 2rem" class="mytable" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>
+                <th>奥克兰</th>
+                <th>上场</th>
+                <th>投篮</th>
+                <th>三分</th>
+                <th>罚球</th>
+                <th>篮板</th>
+                <th>助攻</th>
+                <th>犯规</th>
+                <th>得分</th>
+              </tr>
+              <tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr><tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr><tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr>
+              </tbody>
+            </table>
+            <table style="margin-top: 2rem" class="mytable" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>
+                <th>伊利诺芝加哥</th>
+                <th>上场</th>
+                <th>投篮</th>
+                <th>三分</th>
+                <th>罚球</th>
+                <th>篮板</th>
+                <th>助攻</th>
+                <th>犯规</th>
+                <th>得分</th>
+              </tr>
+              <tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr><tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr><tr align="center">
+                <td>奥克兰</td>
+                <td>20</td>
+                <td>4-13</td>
+                <td>0-4</td>
+                <td>3-3</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="red">11</td>
+              </tr>
+              </tbody>
+            </table>
+            <table style="margin-top: 2rem" class="mytable" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>
+                <th>奥克兰</th>
+                <th>球队数据</th>
+                <th>迈阿密热火</th>
+              </tr>
+              <tr align="center">
+                <td>36/73（49%）</td>
+                <td class="huibg">命中/投篮</td>
+                <td>36/73（49%）</td>
+              </tr>
+              <tr align="center">
+                <td>36/73（49%）</td>
+                <td class="huibg">命中/投篮</td>
+                <td>36/73（49%）</td>
+              </tr>
+              <tr align="center">
+                <td>36/73（49%）</td>
+                <td class="huibg">命中/投篮</td>
+                <td>36/73（49%）</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
           <div v-if="tabKey===1" class="nodata">暂无数据</div>
           <div v-if="tabKey===2">
@@ -108,12 +188,10 @@
                 <th>全场</th>
                 <th>赛</th>
                 <th>胜</th>
-                <th>平</th>
                 <th>负</th>
                 <th>得</th>
                 <th>失</th>
                 <th>净</th>
-                <th>积分</th>
                 <th>排名</th>
                 <th>胜率</th>
               </tr>
@@ -122,52 +200,22 @@
                 <td>20</td>
                 <td>8</td>
                 <td>7</td>
-                <td>5</td>
                 <td>34</td>
                 <td>24</td>
                 <td>10</td>
                 <td>31</td>
-                <td>6</td>
                 <td>40%</td>
               </tr>
               <tr align="center">
-                <td>主</td>
-                <td>9</td>
-                <td>2</td>
-                <td>5</td>
-                <td>2</td>
-                <td>14</td>
-                <td>12</td>
-                <td>2</td>
-                <td>11</td>
-                <td>11</td>
-                <td>22%</td>
-              </tr>
-              <tr align="center">
-                <td>客</td>
-                <td>11</td>
-                <td>6</td>
-                <td>2</td>
-                <td>3</td>
+                <td>总</td>
                 <td>20</td>
-                <td>12</td>
-                <td>8</td>
-                <td>20</td>
-                <td>4</td>
-                <td>55%</td>
-              </tr>
-              <tr align="center">
-                <td>近</td>
-                <td>6</td>
-                <td>2</td>
-                <td>3</td>
-                <td>1</td>
                 <td>8</td>
                 <td>7</td>
-                <td>1</td>
-                <td>9</td>
-                <td></td>
-                <td>33%</td>
+                <td>34</td>
+                <td>24</td>
+                <td>10</td>
+                <td>31</td>
+                <td>40%</td>
               </tr>
               </tbody>
             </table>
@@ -180,66 +228,34 @@
                 <th>全场</th>
                 <th>赛</th>
                 <th>胜</th>
-                <th>平</th>
                 <th>负</th>
                 <th>得</th>
                 <th>失</th>
                 <th>净</th>
-                <th>积分</th>
                 <th>排名</th>
                 <th>胜率</th>
               </tr>
               <tr align="center">
                 <td>总</td>
                 <td>20</td>
-                <td>5</td>
                 <td>7</td>
                 <td>8</td>
                 <td>34</td>
                 <td>34</td>
                 <td>0</td>
                 <td>22</td>
-                <td>13</td>
                 <td>25%</td>
               </tr>
               <tr align="center">
-                <td>主</td>
-                <td>11</td>
-                <td>4</td>
-                <td>5</td>
-                <td>2</td>
+                <td>总</td>
+                <td>20</td>
+                <td>7</td>
+                <td>8</td>
+                <td>34</td>
+                <td>34</td>
+                <td>0</td>
                 <td>22</td>
-                <td>17</td>
-                <td>5</td>
-                <td>17</td>
-                <td>7</td>
-                <td>36%</td>
-              </tr>
-              <tr align="center">
-                <td>客</td>
-                <td>9</td>
-                <td>1</td>
-                <td>2</td>
-                <td>6</td>
-                <td>12</td>
-                <td>17</td>
-                <td>-5</td>
-                <td>5</td>
-                <td>14</td>
-                <td>11%</td>
-              </tr>
-              <tr align="center">
-                <td>近</td>
-                <td>6</td>
-                <td>1</td>
-                <td>4</td>
-                <td>1</td>
-                <td>13</td>
-                <td>11</td>
-                <td>2</td>
-                <td>7</td>
-                <td></td>
-                <td>17%</td>
+                <td>25%</td>
               </tr>
               </tbody>
             </table>
@@ -254,7 +270,7 @@
                 <th>主场 </th>
                 <th>比分</th>
                 <th>客场</th>
-                <th>盘路</th>
+                <th>让</th>
               </tr>
               <tr align="center">
                 <td>2017</td>
@@ -1381,35 +1397,18 @@
 
 <script>
     export default {
-        name: "immediate",
+        name: "basketball-immediate",
       data() {
         return {
           msg: 'Welcome to Your Vue.js App',
           tabKey:'',//即时详情>大小导航切换
           ScheduleDetails:[],//赛事详情头信息
-          ScheduleEvent:[],//赛事详情事件
-          EventList:[],//赛事事件列表
-          Statistics:[],//赛事技术统计
-          SeasonSta:[],//赛季胜负统计
           home_team:'',//主场团队id
           visiting_team:''//客场团队id
         }
       },
       watch: {
 
-      },
-      computed: {
-        // 计算属性的 getter
-        top(){
-          // `this` 指向 vm 实例var arr = []
-          let arr=[];
-          for (let i in this.SeasonSta) {
-            arr.push(this.SeasonSta[i]); //属性
-            //arr.push(object[i]); //值
-          }
-          console.log(arr);
-          return arr
-        }
       },
       created() {//创建完成
         this.$on('ScheduleDetails', msg => { // 赛事详情头信息接口
@@ -1434,101 +1433,9 @@
             });
           });
         });
-        this.$on('ScheduleEvent', msg => { // 赛事详情事件
-          this._api('ScheduleDetails/ScheduleEvent', {mid:this.$route.query.id}).then(r => {
-            r=r.body;
-            r.status === 'ok' ? (() => {
-              r=r.data;
-              this.ScheduleEvent=r;
-            })() : (() => {
-              this.$dialog.toast({
-                mes: r.msg,
-                timeout: 1500,
-                icon: 'error'
-              });
-            })();
-          }, e => {
-            this.$dialog.toast({
-              mes: `${msg.msg || msg}失败`,
-              timeout: 1500,
-              icon: 'error'
-            });
-          });
-        });
-        this.$on('EventList', msg => { // 赛事事件列表接口
-          this._api('ScheduleDetails/EventList', {mid:this.$route.query.id}).then(r => {
-            r=r.body;
-            r.status === 'ok' ? (() => {
-              r=r.data;
-              this.EventList=r;
-            })() : (() => {
-              this.$dialog.toast({
-                mes: r.msg,
-                timeout: 1500,
-                icon: 'error'
-              });
-            })();
-          }, e => {
-            this.$dialog.toast({
-              mes: `${msg.msg || msg}失败`,
-              timeout: 1500,
-              icon: 'error'
-            });
-          });
-        });
-        this.$on('Statistics', msg => { // 赛事技术统计
-          this._api('ScheduleDetails/Statistics', {mid:this.$route.query.id}).then(r => {
-            r=r.body;
-            r.status === 'ok' ? (() => {
-              r=r.data;
-              this.Statistics=r;
-            })() : (() => {
-              this.$dialog.toast({
-                mes: r.msg,
-                timeout: 1500,
-                icon: 'error'
-              });
-            })();
-          }, e => {
-            this.$dialog.toast({
-              mes: `${msg.msg || msg}失败`,
-              timeout: 1500,
-              icon: 'error'
-            });
-          });
-        });
-        this.$on('SeasonSta', msg => { // 赛季胜负统计
-          this._api('ScheduleDetails/SeasonSta', {
-            mid:this.$route.query.id,
-            home_team:this.home_team,
-            visiting_team:this.visiting_team,
-          }).then(r => {
-            r=r.body;
-            r.status === 'ok' ? (() => {
-              r=r.data;
-              this.SeasonSta=r;
-              console.log(this.SeasonSta)
-            })() : (() => {
-              this.$dialog.toast({
-                mes: r.msg,
-                timeout: 1500,
-                icon: 'error'
-              });
-            })();
-          }, e => {
-            this.$dialog.toast({
-              mes: `${msg.msg || msg}失败`,
-              timeout: 1500,
-              icon: 'error'
-            });
-          });
-        });
       },
       mounted() {//组件渲染完成
         this.$emit('ScheduleDetails','获取赛事详情头信息');
-        this.$emit('ScheduleEvent','获取赛事详情事件');
-        this.$emit('EventList','获取赛事事件列表');
-        this.$emit('Statistics','获取赛事技术统计');
       },
       methods: {//事件
         linkToC(e) {

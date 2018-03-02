@@ -55,10 +55,16 @@
               </div>
               <div class="clear"></div>
             </div>
-            <div class="listvs" @click.capture="$router.push({path:'/immediate',query:{id:x.id}})">
+            <div class="listvs" @click.capture="$router.push({path:`/${mid===2?'basketballImmediate':'immediate'}`,query:{id:x.id}})">
               <div class="listtop_left"><span v-text="x.home_team"></span></div>
               <div class="listtop_mobile"><span v-text="x.total_score"></span></div>
-              <div class="listtop_right"><span v-text="x.visiting_team"></span><a>>></a></div>
+              <div class="listtop_right"><span v-text="x.visiting_team"></span><a v-if="mid!==2">详情>></a></div>
+              <div class="clear"></div>
+            </div>
+            <div class="listodd" v-if="mid===2" @click.capture="$router.push({path:'/basketballImmediate',query:{id:x.id}})">
+              <div class="listtop_left"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span></div>
+              <div class="listtop_mobile"><img style="width: 16px" src="../assets/images/img19.png"></div>
+              <div class="listtop_right"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><a>详情>></a></div>
               <div class="clear"></div>
             </div>
           </li>
@@ -83,6 +89,7 @@
           TimeChoice:[],//时间选择
           nextDay:parseInt((new Date().getTime()+24*60*60*1000)/1000),//下日的当前时间
           getClassifyInfo:[],//赛程分类接口
+          mid:'',
         }
       },
       created() {
@@ -95,6 +102,7 @@
             r.status === 'ok' ? (() => {
               r=r.data;
               this.getSchedule=r;
+              this.mid=this.$route.query.pid;
               console.log(r)
             })() : (() => {
               this.$dialog.toast({

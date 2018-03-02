@@ -64,7 +64,9 @@
       },
       created() {//创建完成
         this.$on('getCateList', msg => { // 资料库分类列表
-          this._api('Information/getCateList', {mcid:this.$route.query.pid}).then(r => {
+          this._api('Information/getCateList', {
+            mcid:this.$route.query.pid
+          }).then(r => {
             r=r.body;
             r.status === 'ok' ? (() => {
               r=r.data;

@@ -14,7 +14,8 @@ Vue.use(VueResource);
 Vue.use(Router);
 const main = r => require.ensure([], () => r(require('../components/main.vue')), 'main'),//主頁面
   setUp = r => require.ensure([], () => r(require('../components/setUp.vue')), 'main'),//设置
-  immediate = r => require.ensure([], () => r(require('../components/immediate.vue')), 'main'),//即时
+  immediate = r => require.ensure([], () => r(require('../components/immediate.vue')), 'main'),//即时详情
+  basketballImmediate = r => require.ensure([], () => r(require('../components/basketballImmediate.vue')), 'main'),//篮球即时详情
   schedule = r => require.ensure([], () => r(require('../components/schedule.vue')), 'main'),//赛程
   prospect = r => require.ensure([], () => r(require('../components/prospect.vue')), 'main'),//前瞻
   prospectDetail = r => require.ensure([], () => r(require('../components/prospectDetail.vue')), 'main'),//前瞻详情
@@ -44,6 +45,10 @@ export default new Router({
       path: '/immediate',
       name: 'immediate',
       component: immediate
+    },{
+      path: '/basketballImmediate',
+      name: 'basketballImmediate',
+      component: basketballImmediate
     },{
       path: '/schedule',
       name: 'schedule',

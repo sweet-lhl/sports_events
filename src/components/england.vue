@@ -340,7 +340,7 @@
         });
       });
       this.$on('getSeasonList', msg => { // 赛季列表
-        this._api('Information/getSeasonList', {}).then(r => {
+        this._api('Information/getSeasonList', {cid:this.$route.query.cid}).then(r => {
           r = r.body;
           r.status === 'ok' ? (() => {
             r = r.data;
